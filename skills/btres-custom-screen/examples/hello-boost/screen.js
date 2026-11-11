@@ -1,0 +1,2 @@
+(function(){var G=function(k){var o=window.gaugeVars&&gaugeVars[k];if(!o||o.v===undefined||o.v==='')return null;var n=parseFloat(o.v);return isNaN(n)?null:n};
+setInterval(function(){var p=G('psrg_w'),u=G('pu_w');var e=document.getElementById('b');if(!e)return;var b=p===null||u===null?null:(p-u)*0.0145038;e.textContent=b===null?'--':b.toFixed(1);var c=document.getElementById('c').getContext('2d');c.clearRect(0,0,600,60);c.fillStyle='#7ee05a';c.fillRect(0,0,b===null?0:Math.max(0,Math.min(600,b*12)),60)},100)})()
