@@ -6,6 +6,9 @@ AI-agent skills for building custom data screens for bTres gauge units. Each ski
 |---|---|
 | [`btres-custom-screen`](skills/btres-custom-screen/) | Designs and builds a custom screen for an S-series (1920x480) or M1 / X1 (800x480) bTres unit that shows any DS1 monitor, default or custom. Includes a packager, a preview renderer, reference docs, and examples (a minimal screen, Pull Lab, Live Dyno, 3D-engine knock screens). |
 
+## Where screens go
+Screens built with these skills can be uploaded, shared and managed at **https://gallery.betterthan.shop**, the bTres screen gallery.
+
 ## Install a skill
 - **Claude Code:** copy the skill folder (e.g. `skills/btres-custom-screen`) into `~/.claude/skills/` or `<project>/.claude/skills/`.
 - **Claude.ai / desktop:** zip the skill folder (the folder itself at the top of the zip) and upload it under Settings > Capabilities > Skills.

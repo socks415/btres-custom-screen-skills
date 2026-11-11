@@ -9,3 +9,5 @@ python3 scripts/build.py --car v8|rs3 --unit s|m1x1 --out ./out
 ```
 
 `GUIDE.md` explains how they are built and how to rebuild or adapt them, `REFERENCE.md` documents their behaviour (alert levels, last-pull rules, firing-order mapping, layout geometry). Python 3 only. They were checked in headless Chrome and by a V8 owner in a car, not on every unit type.
+
+**Gallery note:** these screens start their (large) code with a base64 loader (`eval(atob(...))`), which the screen gallery's upload scanner reports as high risk (code built at run time). The smaller screens made with `scripts/make_screen.py`, and Pull Lab / Live Dyno, scan clean.

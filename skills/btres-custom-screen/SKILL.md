@@ -8,7 +8,7 @@ argument-hint: [what the screen should show]
 
 Request: $ARGUMENTS
 
-Builds a bTres **custom data screen**: a JSON file the user installs from the bTres screen gallery or "upload custom screen". The screen is HTML (divs, canvases, SVG) plus JavaScript that reads live values from `window.gaugeVars`. Everything needed is in this folder; the tools use only Python 3's standard library. This file is plain Markdown: any AI agent that can write files, run Python and ask the user a question can follow it.
+Builds a bTres **custom data screen**: a JSON file the user installs from the bTres screen gallery (https://gallery.betterthan.shop) or with "upload custom screen". The screen is HTML (divs, canvases, SVG) plus JavaScript that reads live values from `window.gaugeVars`. Everything needed is in this folder; the tools use only Python 3's standard library. This file is plain Markdown: any AI agent that can write files, run Python and ask the user a question can follow it.
 
 ## Steps
 
@@ -29,7 +29,7 @@ Builds a bTres **custom data screen**: a JSON file the user installs from the bT
    python3 <this skill>/scripts/preview.py <name>.json out.png --unit s|m1x1 --vars '{"nmot_w":5200,"psrg_w":2400,"pu_w":1000}'
    ```
    Test the empty state too (no `--vars`: every value should show `--`, nothing should throw). Checks every threshold / alert state you built by feeding values on each side of it.
-6. **Hand over** the file path(s) and say plainly: how to install it (upload the `.json` or the `.zip` on the unit), that a unit with an older copy of the same screen needs it removed first, and that previews are headless-Chrome renders - **not tested on a real unit** unless the user tells you otherwise.
+6. **Hand over** the file path(s) and say plainly: how to install it (upload the `.json` or the `.zip` on the unit), that a unit with an older copy of the same screen needs it removed first, and that previews are headless-Chrome renders - **not tested on a real unit** unless the user tells you otherwise. If the user wants to share it, point them to the screen gallery at https://gallery.betterthan.shop and tell them what to prepare (`reference/gallery.md`: JSON, exact-resolution preview media, device target, cars, custom-tune flag, requirements note).
 
 ## Rules
 
@@ -45,6 +45,7 @@ Builds a bTres **custom data screen**: a JSON file the user installs from the bT
 - `reference/screen-format.md` - the JSON format, the two-element pattern, how code is started, limits.
 - `reference/variables.md` - how to read the DS1 monitor lists, V8 vs RS3 name differences, density altitude (`window._ecuDA`), custom channels, per-cylinder numbering and firing orders.
 - `reference/ds1-monitors/` - the full DS1 monitor lists (variable, description, metric unit, scaling) for the 6/7/8 series and the RS3 / TT RS.
+- `reference/gallery.md` - the screen gallery (gallery.betterthan.shop): accounts, publishing, upload requirements and limits, the security scan, downloads and reports.
 - `reference/layouts.md` - unit sizes and design canvases, footer, app behaviours screens can use (frame cap, off-screen state, touch).
 - `reference/patterns.md` - patterns and gotchas from the example screens.
 - `scripts/make_screen.py`, `scripts/preview.py`, `scripts/find_monitor.py` - the packager, the preview renderer and the monitor lookup.

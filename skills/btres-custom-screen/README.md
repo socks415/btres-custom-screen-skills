@@ -9,6 +9,9 @@ An AI-agent skill for designing and building **custom data screens for bTres gau
 
 Requirements: Python 3 (standard library only); Google Chrome or Chromium for previews.
 
+## Share your screens
+Upload and manage your screens at **https://gallery.betterthan.shop** (see `reference/gallery.md` for accounts, requirements and limits).
+
 ## Use the tools without an AI
 ```
 python3 scripts/make_screen.py --name "My Screen" --html screen.html --js screen.js --unit s --out ./out
@@ -17,6 +20,6 @@ python3 scripts/preview.py ./out/My-Screen.json shot.png --unit s --vars '{"psrg
 Try it with `examples/hello-boost/`.
 
 ## What's inside
-`SKILL.md` (the workflow), `reference/` (JSON format, DS1 variables and the full 6/7/8 series and RS3 / TT RS monitor lists, unit layouts, patterns), `scripts/` (packager, preview, monitor lookup), `examples/` (a minimal screen, Pull Lab, Live Dyno, and the 3D knock screens).
+`SKILL.md` (the workflow), `reference/` (JSON format, the screen gallery at gallery.betterthan.shop, DS1 variables and the full 6/7/8 series and RS3 / TT RS monitor lists, unit layouts, patterns), `scripts/` (packager, preview, monitor lookup), `examples/` (a minimal screen, Pull Lab, Live Dyno, and the 3D knock screens).
 
 Screens are checked in headless renders; always test on your own unit. Licensed GPL-3.0-or-later (see the repo `LICENSE`).

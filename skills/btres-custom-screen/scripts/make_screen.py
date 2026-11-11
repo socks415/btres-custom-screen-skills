@@ -13,9 +13,12 @@
   --trigger  the textData monitor's minMaxThreshold expression (default "[wped_w]>80"), harmless for most screens
   --key      guard name; default is derived from the JS so changed code always re-runs on the unit
 
+The packaged JSON is checked the way the screen gallery (gallery.betterthan.shop) scans uploads: no network calls,
+links, or code built at run time. Keep your own JS free of fetch / XMLHttpRequest / WebSocket / URLs.
+
 Writes <out>/<Name>.json and <out>/<Name>.json.zip. Python 3 standard library only.
 """
-import argparse, base64, hashlib, json, os, re, sys, zipfile
+import argparse, hashlib, html as _html, json, os, re, sys, zipfile
 
 SIZES = {"s": (1920, 480), "m1x1": (1143, 686)}
 LIMIT = 1048576
@@ -39,13 +42,13 @@ for bad in ("<script", "<html", "<body"):
         sys.exit("html must be a fragment: remove %s (put logic in --js)" % bad)
 
 if js:
-    # atob() returns Latin-1: keep the code ASCII, escaping anything else as \uXXXX (fine in strings, regexes, comments)
-    js = js.encode("ascii", "backslashreplace").decode()
+    # The code is embedded as an ordinary string literal that is eval'd once. (Not base64/atob: the screen gallery's
+    # upload scanner flags code assembled at run time as high risk; a plain literal is reported as normal.)
+    # json.dumps escapes quotes, newlines and non-ASCII (\uXXXX), so the literal is safe anywhere.
     key = a.key or "bt_" + hashlib.sha1(js.encode()).hexdigest()[:8]
     key = re.sub(r"[^A-Za-z0-9_]", "_", key)
-    b64 = base64.b64encode(js.encode()).decode()
-    run = "(window.%s||(window.%s=1,eval(atob('%s'))))" % (key, key, b64)
-    html = html + '<img src="data:," style="display:none" onerror="%s">' % run.replace('"', "&quot;")
+    run = "(window.%s||(window.%s=1,eval(%s)))" % (key, key, json.dumps(js))
+    html = html + '<img src="data:," style="display:none" onerror="%s">' % _html.escape(run, quote=True)
     monitor = run
 else:
     monitor = ""
