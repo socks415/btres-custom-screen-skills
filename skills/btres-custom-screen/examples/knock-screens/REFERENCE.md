@@ -37,7 +37,7 @@ Variable index k belongs to physical cylinder FO[k]:
 `{"settings":{"showFooterBar":false},"elements":[ <text element>, <textData loader monitor> ]}`. The text element holds the HTML and a base64 payload (three.js r128 + the screen JS) that an `<img onerror=eval(atob(...))>` loads; a version-tag guard (`window.bt8v!==VER`) re-initialises when the code changes. 1.00 MB JSON limit. All four builds set `showFooterBar:false`: the app hides its native footer bar on these screens (the 1920 screens draw their own temps/ethanol/volts bar).
 
 ## Behaviours that depend on the bTres app
-- The app caps `requestAnimationFrame` globally (`bT.maxFps`, 30) and sets `.bt-offscreen` on custom screens that are fully out of view (`window.btScreenVisible[id]`). The screen then runs only its data logic.
+- The app caps `requestAnimationFrame` globally (about 30 fps) and sets `.bt-offscreen` on custom screens that are fully out of view (`window.btScreenVisible[id]`). The screen then runs only its data logic.
 - The engine canvas is hidden (`visibility:hidden` on `#bt8gl`) until its screen is >= 98 % in view plus 100 ms (`.bt-full`, `window.btFullTracking`), and `updateGL()` skips drawing meanwhile. Older apps without the flag draw normally.
 - Before the first engine frame the callout lines point at the engine area's centre under a black "LOADING ENGINE" box. The engine is built ~60 ms after attach so that note is visible.
 - Coarser 3D detail (shadow map 1024, 28-segment cylinders, 10x32 tori, 8-sided tubes, 2/4 extrude bevel/curve segments) in `scripts/knock_lod.py`.

@@ -57,7 +57,7 @@ Each entry: `var` (the name used in `gaugeVars`), `desc` (DS1's description), `u
 | speeds | `vfzg_w`, `VehV_vWhlFrtL/FrtR/RrL/RrR` | |
 | accel | `Com_aLng` | m/s^2 |
 | custom channels | `customresult1` ... (e.g. 5 = nitrous %, 10 = DI reduction, 14 = PI ms in the example setup) | **meaning is defined by the user's DS1 setup**: ask |
-| app values | `window.bT.carWeight` (lb), `window._ecuDA` (density altitude), `window.bT.carModel` | not in gaugeVars |
+| app values | device settings: `btScreen.settings.*` (car, weight, tires, units, map names; see `app-api.md`), `window._ecuDA` (density altitude) | not in gaugeVars; don't use `window.bT` |
 
 ## Cylinder numbering is firing order
 The numbered variables follow the engine's firing order, not the physical cylinder order. Variable index k (0 = unsuffixed) belongs to physical cylinder FO[k]:

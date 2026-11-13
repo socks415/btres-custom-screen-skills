@@ -25,7 +25,7 @@ The **screen type is chosen at upload and cannot be changed** later.
 | Preview media | one or more JPG, PNG or MP4, ordered (the first is the cover); up to **12** per screen. Must be **exactly the display's resolution: 1920x480 (S-series) or 800x480 (M1 / X1)**; other sizes are refused |
 | Screen file | exactly one `.json` screen file (or a `.zip` for a screen that bundles images; see limits), which must parse |
 | Requires a custom tune | checkbox: downloaders see a warning and must confirm before downloading |
-| Description / Requirements | free text (max 1200 / 800 characters); list the DS1 monitors or custom channels the screen needs |
+| Description / Requirements | free text (max 1200 / 800 characters); list the DS1 monitors or custom channels the screen needs, and mention if it uses `btScreen` (saved settings / keyboard), which needs a bTres app version that has it |
 
 **Limits**: image 10 MB, MP4 60 MB, screen JSON **1 MB**, ZIP 20 MB (200 MB unpacked, 500 files). Uploads are checked by file signature, not extension. This is why the skill keeps screens under 1.00 MB.
 

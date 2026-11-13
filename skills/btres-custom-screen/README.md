@@ -20,6 +20,6 @@ python3 scripts/preview.py ./out/My-Screen.json shot.png --unit s --vars '{"psrg
 Try it with `examples/hello-boost/`.
 
 ## What's inside
-`SKILL.md` (the workflow), `reference/` (JSON format, the screen gallery at gallery.betterthan.shop, DS1 variables and the full 6/7/8 series and RS3 / TT RS monitor lists, unit layouts, patterns), `scripts/` (packager, preview, monitor lookup), `examples/` (a minimal screen, Pull Lab, Live Dyno, and the 3D knock screens).
+`SKILL.md` (the workflow), `reference/` (JSON format, the screen gallery at gallery.betterthan.shop, the `btScreen` API (device settings, saved data, keyboard), DS1 variables and the full 6/7/8 series and RS3 / TT RS monitor lists, unit layouts and unit settings, design guidelines, traps, DS1 logging and safety, patterns), `scripts/` (packager, preview, monitor lookup, lint), `examples/` (a minimal screen, Pull Lab, Live Dyno, and the 3D knock screens).
 
 Screens are checked in headless renders; always test on your own unit. Licensed GPL-3.0-or-later (see the repo `LICENSE`).

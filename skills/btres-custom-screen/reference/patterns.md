@@ -15,7 +15,7 @@ Notes taken from the example screens that ship in `examples/` (**Pull Lab**: pul
 - Lambda: wideband can read ~16 when not ready; cap or hide above ~2.
 
 ## Extra variables seen (see also variables.md)
-`nmot_w` rpm, `gangi` gear, `zwist` actual ignition (average), `miist_w` ECU torque, `Com_aLng` longitudinal accel, `vfzg_w` and `VehV_vWhlFrtL/FrtR/RrL/RrR` speeds, `tvldste_w` WGDC %, `toel` oil temp (C), `tans` intake temp (C), `ethanolpercent`, `mapswitch`, `wped_w` pedal, `rl_w` load, `customresult5` (NOS %), `customresult10`, `customresult14` (user-defined channels; meaning is up to the user's setup), `window.bT.carWeight` (lb), `window._ecuDA` (density altitude).
+`nmot_w` rpm, `gangi` gear, `zwist` actual ignition (average), `miist_w` ECU torque, `Com_aLng` longitudinal accel, `vfzg_w` and `VehV_vWhlFrtL/FrtR/RrL/RrR` speeds, `tvldste_w` WGDC %, `toel` oil temp (C), `tans` intake temp (C), `ethanolpercent`, `mapswitch`, `wped_w` pedal, `rl_w` load, `customresult5` (NOS %), `customresult10`, `customresult14` (user-defined channels; meaning is up to the user's setup), `btScreen.settings.carWeight` (lb; older screens read the app's internals for this, which new screens must not), `window._ecuDA` (density altitude).
 
 ## Pull rules used elsewhere
 - Pull Lab / Live Dyno start a pull at pedal >= 90 % and load >= 120 for 0.5 s and end it 0.5 s after pedal < 50 %; a pull must last >= 1.5 s to count. The knock screens use a simpler pedal >= 80 % rule (see `examples/knock-screens/REFERENCE.md`). Pick one per screen and say which.
