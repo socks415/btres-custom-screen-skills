@@ -20,7 +20,7 @@
 | LPFP | `pbkist_w`, `pbksoll_w` | /100 -> bar |
 | HPFP | `prroh_w` / `prsoll_w` (B1), `prroh2_w` / `prsoll2_w` (B2, V8 only) | MPa |
 | lambda | `lamsoni_w` (B1), `lamsoni2_w` (B2, V8 only) | capped at 1.99 like the main lambda gauge (unready sensors read ~16) |
-| temps | `tans` (intake), `toel` (oil; RS3 falls back to `toelk_w`), `tmot` (coolant), `Gbx_tOilConv` (trans) | degrees C |
+| temps | `tans` (charge air, not ambient), `tumc` (outside air), `toel` (oil; RS3 falls back to `toelk_w`), `tmot` (coolant), `Gbx_tOilConv` (trans) | degrees C |
 | other | `ethanolpercent`, `ubsq` (volts), `mapswitch`, `window._ecuDA` (density altitude) | footer bar of the 1920 screens |
 
 ### Firing-order mapping

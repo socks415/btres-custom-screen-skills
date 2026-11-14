@@ -49,7 +49,7 @@ Each entry: `var` (the name used in `gaugeVars`), `desc` (DS1's description), `u
 | ignition per cylinder | `zwcalcar`, `zwcalcar_2` ... | deg, firing-order numbered |
 | knock correction per cylinder | `wkrv`, `wkrv_2` ... | deg, <= 0, firing-order numbered |
 | ECU torque | `miist_w` | |
-| temps | `tans` (intake), `toel` / `toelk_w` (oil, C), `tmot` (coolant), `Gbx_tOilConv` (trans) | C |
+| temps | `tans` (charge air: after the compressor and intercooler, measured at the engine; NOT ambient), `tumc` (outside / ambient air), `toel` / `toelk_w` (oil, C), `tmot` (coolant), `Gbx_tOilConv` (trans) | C |
 | WGDC | `tvldste_w` | % |
 | ethanol | `ethanolpercent` | % |
 | battery | `ubsq` | V |
@@ -68,3 +68,9 @@ The numbered variables follow the engine's firing order, not the physical cylind
 ## Handy conversions
 - boost psi = `(psrg_w - pu_w) * 0.0145037738`
 - kPa -> bar `/100`; C -> F `c*9/5+32`
+
+## Air temperature: charge air vs outside air
+- `tans` = **charge air temperature**: the air after the compressor and any cooling, measured at the engine. It reads high under boost (about 57 C on pulls is normal). **Never label it ambient, outside or IAT.**
+- `tumc` = **outside (ambient) air temperature**. Use it when a screen needs ambient temperature.
+- On the RS3 / TT RS, `tavv_w` is the intake air temperature before the compressor.
+- Temperatures are Celsius; convert with `btScreen.settings.ctoF` (see `units.md`).
