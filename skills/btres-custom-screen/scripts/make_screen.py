@@ -47,7 +47,12 @@ if js:
     # json.dumps escapes quotes, newlines and non-ASCII (\uXXXX), so the literal is safe anywhere.
     key = a.key or "bt_" + hashlib.sha1(js.encode()).hexdigest()[:8]
     key = re.sub(r"[^A-Za-z0-9_]", "_", key)
-    run = "(window.%s||(window.%s=1,eval(%s)))" % (key, key, json.dumps(js))
+    # The "already started" flag is set only AFTER the code ran without throwing. (Setting it first - `window.KEY=1,eval(..)` -
+    # meant that an exception during setup left a dead screen for good: the unit evaluates this inside a try/catch that hides
+    # the error, and the flag stopped every retry.) A failed start is retried on the monitor's next tick, at most 3 times, so
+    # code that can never start doesn't re-run forever. Consequence for the screen's code: setup must be safe to run again
+    # (don't register a second setInterval / listener when an earlier attempt already got that far).
+    run = "(window.%s||((window.%s_n=(window.%s_n||0)+1)<4&&(eval(%s),window.%s=1)))" % (key, key, key, json.dumps(js), key)
     html = html + '<img src="data:," style="display:none" onerror="%s">' % _html.escape(run, quote=True)
     monitor = run
 else:

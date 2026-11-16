@@ -26,7 +26,7 @@ Output is a bTres custom data-screen JSON (and a `.zip` of it) that the user ins
 3. **Check the result** if you can: the screens render in headless Chrome (software WebGL is slow, give the engine 10 s or more to appear; before it appears the screen shows a "LOADING ENGINE" note). Fake `window.gaugeVars` values from `REFERENCE.md` to see knock alerts.
 4. **Hand over** the file path(s) and tell the user, plainly:
    - install the `.zip` (or the `.json`) on the unit; the screen hides the native footer bar itself;
-   - a unit that already has the same version tag (`v8k-19`, `v8w-2`, `r3k-2`, `r3w-2`) keeps its cached code, so uninstall the old one first;
+   - a unit that already has the same version tag (`v8k-20`, `v8w-3`, `r3k-3`, `r3w-3`; the version tag comes from `scripts/harden_knock.py`, the last build step) keeps its cached code, so uninstall the old one first;
    - these screens have been checked in headless renders and by a V8 owner in a car, not on every unit type - say so rather than claiming they are proven on the user's car.
 
 ## Rules

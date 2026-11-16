@@ -34,7 +34,7 @@ Variable index k belongs to physical cylinder FO[k]:
 - Three canvases: `bt8base` (gauges, under), `bt8gl` (three.js engine), `bt8over` (callouts and lines, on top). Element ids are `bt8*`.
 
 ## Screen JSON format
-`{"settings":{"showFooterBar":false},"elements":[ <text element>, <textData loader monitor> ]}`. The text element holds the HTML and a base64 payload (three.js r128 + the screen JS) that an `<img onerror=eval(atob(...))>` loads; a version-tag guard (`window.bt8v!==VER`) re-initialises when the code changes. 1.00 MB JSON limit. All four builds set `showFooterBar:false`: the app hides its native footer bar on these screens (the 1920 screens draw their own temps/ethanol/volts bar).
+`{"settings":{"showFooterBar":false},"elements":[ <text element>, <textData loader monitor> ]}`. The text element holds the HTML and a base64 payload (three.js r128 + the screen JS) that an `<img onerror=eval(atob(...))>` loads; a version-tag guard (`window.bt8v!==VER`) re-initialises when the code changes. The tag is set only **after** the setup ran to the end, and the loader monitor retries a failed start up to 4 times, then writes "Engine failed to start. Please restart your bTres." on the screen (`scripts/harden_knock.py`). 1.00 MB JSON limit. All four builds set `showFooterBar:false`: the app hides its native footer bar on these screens (the 1920 screens draw their own temps/ethanol/volts bar).
 
 ## Behaviours that depend on the bTres app
 - The app caps `requestAnimationFrame` globally (about 30 fps) and sets `.bt-offscreen` on custom screens that are fully out of view (`window.btScreenVisible[id]`). The screen then runs only its data logic.
@@ -46,6 +46,7 @@ Variable index k belongs to physical cylinder FO[k]:
 - `scripts/make_v8_knock_screen_800.py` : 800 layout constants at the top (GL canvas, RX, LAB_X, SLOTS) and asserted replacements. It patches the **base build** (`assets/bTres-V8-Knock-Screen.base.json`).
 - `scripts/make_rs3_knock_screen.py` : 5-cylinder changes (`KN`/`IG`, POS_1920 / POS_800 staggered callouts, zoom, lambda block); the engine comes from `assets/bTres-2.5-TFSI-engine-prototype.html`.
 - `scripts/knock_lod.py` : shared 3D detail and loading-state patches.
+- `scripts/harden_knock.py` : the last build step (`build.py` runs it; usable on any finished knock JSON). Fail-safe start-up and frame loop: version flag set after setup, retry + visible failure message, attach only once both 2D contexts exist, per-part `try/catch` in the frame (a failing 3D render no longer blanks the 2D layers), bounded re-attach after repeated failures. Written after units showed a black screen with only the logos; reproduced by injecting a `null` 2D context and a failing first setup (the unpatched builds stayed black, the patched ones recover). It moves the version tag on (`v8k-19`->`v8k-20`, `v8w-2`->`v8w-3`, `r3k-2`->`r3k-3`, `r3w-2`->`r3w-3`). **Not verified on a real unit.**
 - Alert thresholds: `threshold=-2,THR2=-3` in the screen JS (in the base). Because the base is a finished build, change such things with an added asserted replacement in the relevant script (decode -> replace -> re-encode, see how `make_v8_knock_screen_800.py` does it) and bump the version tag.
 
 ## Testing without a car

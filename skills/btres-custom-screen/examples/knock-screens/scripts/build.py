@@ -7,7 +7,7 @@
   --unit  s   = S-series, 1920x480                   m1x1 = M1 / X1, 800x480 (designed on 1143x686, shown at 0.7)
 
 Writes <out>/<name>.json and <out>/<name>.json.zip (the zip is what the gallery / "install from file" takes).
-Python 3 standard library only. The base screen and the 5-cylinder engine prototype are in ../assets.
+Python 3 standard library only. (make_* scripts build the engine, harden_knock.py makes its start-up and frame loop fail-safe.) The base screen and the 5-cylinder engine prototype are in ../assets.
 """
 import argparse, json, os, shutil, subprocess, sys, tempfile, zipfile
 
@@ -35,6 +35,11 @@ with tempfile.TemporaryDirectory() as tmp:
     else:
         subprocess.run([sys.executable, os.path.join(HERE, "make_rs3_knock_screen.py"), BASE, PROTO, tmp], check=True)
         shutil.copy(os.path.join(tmp, name + ".json"), dest)
+
+# Last step: remove the ways the screen could stay black (see harden_knock.py); it also moves the version tag on (v8k-19 -> v8k-20 ...)
+hardened = dest + ".hardened"
+subprocess.run([sys.executable, os.path.join(HERE, "harden_knock.py"), dest, hardened], check=True)
+os.replace(hardened, dest)
 
 data = open(dest, "rb").read()
 json.loads(data)

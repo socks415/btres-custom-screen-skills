@@ -41,6 +41,7 @@ Builds a bTres **custom data screen**: a JSON file the user installs from the bT
 - **Follow the unit's settings**: units come from `btScreen.settings` (`mapBoost`: BOOST psi vs MAP bar absolute; `ctoF`: F / mph vs C / km/h). No hard-coded `psi`, degree-F or `mph` in text; scale axes per unit; floor boost at 0; engine off (`nmot_w` < 300) means ambient. See `reference/units.md` and `reference/units-snippet.js`.
 - **Safety for an AI agent**: never call the unit's `/updates/*`, `/restart`, `/support/*` or any delete / upload endpoint, never send DS1 `run` / clear-faults / `factory` or any ECU write, and never put anything on a unit without the owner's yes (`reference/ds1-logging.md`).
 - **GPS (bTres Pro only)**: read it by subscribing to the app's GPS feed with `window._gpsSubscribe(handler)`; don't open any connection of your own. Handle "no GPS" / "no fix" / stale data (show `--`), follow `ctoF` for mph vs km/h, and draw from a timer rather than on every 20 Hz message. See `reference/gps.md`.
+- **Make start-up fail-safe.** The unit hides exceptions thrown while a screen starts, so a screen can end up black with no error. Set any "already started" flag only after setup succeeded, attach to canvases only once their contexts exist, isolate each part of a frame in its own `try/catch`, and show a message rather than black if the screen can't start (`reference/traps.md`, Start-up and recovery; `make_screen.py` already does the first part).
 - Keep it light: draw at most ~10-30 times a second, write text only when it changed, skip drawing work when the screen is off-screen (`reference/layouts.md`). The unit's CPU is small.
 - Variables numbered per cylinder (`wkrv_2` ...) follow the **firing order**, not cylinder order. Map them to physical cylinders before labelling a cylinder (`reference/variables.md`).
 - No external network resources: all fonts, images and code are embedded (data URIs). Keep the JSON under 1.00 MB; compress images, avoid huge base64 assets.
@@ -56,7 +57,7 @@ Builds a bTres **custom data screen**: a JSON file the user installs from the bT
 - `reference/units.md` + `reference/units-snippet.js` - psi/bar and F/C following the device's settings, boost math, tested helpers (`scripts/test_units.js`).
 - `reference/gps.md` - the 20 Hz GPS on bTres Pro units: subscribing with `window._gpsSubscribe`, message fields, units, staleness, testing.
 - `reference/design-guidelines.md` - what makes a screen readable on a unit (sizes, colour, readout count, labels).
-- `reference/traps.md` - data, layout, touch and testing traps (gear values, engine-off pressure, footer, swipe zones, ...).
+- `reference/traps.md` - data, layout, touch, start-up/recovery and testing traps (gear values, engine-off pressure, footer, swipe zones, black screens, ...).
 - `reference/ds1-logging.md` - getting a variable onto the unit (monitors.csv / log mask), DS1 facts, hard safety rules for agents.
 - `reference/native-elements.md` - how the unit evaluates the built-in element types (for reading or changing editor-made screens).
 - `reference/layouts.md` - unit sizes and design canvases, footer, app behaviours screens can use (frame cap, off-screen state, touch).
